@@ -18,7 +18,7 @@
                     {% else %}
                         <tr>
                             <td class="mineral__category">{{ key }}</td>
-                            <td>{{ attributes }}</td>
+                            <td>{{ attributes|safe }}</td>
                         </tr>
 
                     {% endif %}

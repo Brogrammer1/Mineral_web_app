@@ -26,3 +26,7 @@ def mineral_detail(request, pk):
         'specific gravity':mineral.specific_gravity,
         'group':mineral.group}
     return render(request, 'mineral_detail.html', {'mineral': mineral,'mineral_attributes':mineral_attributes})
+
+def random_mineral(request):
+    mineral = models.Mineral.objects.order_by('?').first()
+    return mineral_detail(request,mineral.pk)

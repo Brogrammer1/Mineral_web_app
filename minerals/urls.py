@@ -4,5 +4,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-url(r'(?P<pk>\d+)/', views.mineral_detail, name='detail'),
+    url(r'(?P<pk>\d+)/', views.mineral_detail, name='detail'),
+    url(r'random/', views.random_mineral, name='random'),
 ]
