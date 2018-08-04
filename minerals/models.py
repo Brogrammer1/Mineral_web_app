@@ -87,5 +87,5 @@ class Mineral(models.Model):
             crystal_habit=crystal_habit,
             specific_gravity=specific_gravity,
             group=group)
-        # do something with the book
+
 

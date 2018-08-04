@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="grid-100 mineral__container">
-        <h1 class="mineral__name">Mineral Name{{ mineral.name }}</h1>
+        <h1 class="mineral__name">{{ mineral.name }}</h1>
         <div class="mineral__image-bg">
             {% with 'images/'|add:mineral.name|add:'.jpg' as image_file %}
                 {% load static from staticfiles %}
@@ -17,7 +17,7 @@
 
                     {% else %}
                         <tr>
-                            <td class="mineral__category">{{ key }}</td>
+                            <td class="mineral__category">{{ key|title }}</td>
                             <td>{{ attributes|safe }}</td>
                         </tr>
 

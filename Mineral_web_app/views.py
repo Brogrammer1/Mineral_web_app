@@ -5,4 +5,4 @@ from minerals.models import Mineral
 
 def home_page(request):
     minerals = Mineral.objects.all()
-    return render(request, 'index2.html',{'minerals': minerals})
+    return render(request, 'index.html',{'minerals': minerals})
