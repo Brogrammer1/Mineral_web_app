@@ -4,7 +4,7 @@ import json
 
 def load_data(apps, schema_editor):
     Mineral = apps.get_model('minerals', 'Mineral')
-    with open('minerals.json', newline='') as jsnfile:
+    with open('minerals.json', newline='', encoding='utf-8') as jsnfile:
         minerals = json.load(jsnfile)
         mineral_list = list(minerals)
 
