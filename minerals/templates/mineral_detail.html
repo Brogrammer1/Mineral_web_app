@@ -2,42 +2,30 @@
 
 {% block content %}
     <div class="grid-100 mineral__container">
-      <h1 class="mineral__name">Mineral Name{{ mineral.name }}</h1>
-      <div class="mineral__image-bg">
-        <img class="mineral__image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Augelite-au13c.jpg/240px-Augelite-au13c.jpg">
-        <p class="mineral__caption">Mineral caption goes here{{ mineral.image_caption }}</p>
-      </div>
-      <div class="mineral__table-container">
-        <table class="mineral__table">
-          <tr>
-            <td class="mineral__category">Category</td>
-            <td>Mineral category{{ mineral.category }}</td>
-          </tr>
-          <tr>
-            <td class="mineral__category">Formula</td>
-            <td class="mineral__formula">{{ mineral.formula }}</td>
-          </tr>
-          <tr>
-            <td class="mineral__category">Strunz Classification</td>
-            <td>mineral.strunz_classification</td>
-          </tr>
-          <tr>
-            <td class="mineral__category">Unit Cell</td>
-            <td>{{ mineral.unit_cell }}</td>
-          </tr>
-          <tr>
-            <td class="mineral__category">Color</td>
-            <td>{{ mineral.color }}</td>
-          </tr>
-          <tr>
-            <td class="mineral__category">Crystal Habit</td>
-            <td>{{ mineral.crystal_habit }}</td>
-          </tr>
-          <tr>
-            <td class="mineral__category">Mohs Scale Hardness</td>
-            <td>{{ mineral.mohs_scale_hardness }}</td>
-          </tr>
-        </table>
-      </div>
+        <h1 class="mineral__name">{{ mineral.name }}</h1>
+        <div class="mineral__image-bg">
+            {% with 'images/'|add:mineral.name|add:'.jpg' as image_file %}
+                {% load static from staticfiles %}
+                <img class="mineral__image" src="{% static image_file %}">
+            {% endwith %}
+            <p class="mineral__caption">{{ mineral.image_caption }}</p>
+        </div>
+        <div class="mineral__table-container">
+            <table class="mineral__table">
+                {% for key,attributes in mineral_attributes.items %}
+                    {% if attributes == '' %}
+
+                    {% else %}
+                        <tr>
+                            <td class="mineral__category">{{ key|title }}</td>
+                            <td>{{ attributes|safe }}</td>
+                        </tr>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </table>
+        </div>
     </div>
 {% endblock %}

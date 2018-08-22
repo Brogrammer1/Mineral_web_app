@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render
-
+from django.db.models import Q, Count
 from . import models
 
 
@@ -33,3 +33,24 @@ def mineral_detail(request, pk):
 def random_mineral(request):
     mineral = models.Mineral.objects.order_by('?').first()
     return mineral_detail(request, mineral.pk)
+
+
+def search(request):
+    term = request.GET.get('q')
+    minerals = models.Mineral.objects.filter(Q(name__icontains=term))
+    return render(request, 'index.html', {'minerals': minerals})
+
+
+def search_group(request, group):
+    if group == 'OrganicMinerals':
+        group = 'Organic Minerals'
+    elif group == 'NativeElements':
+        group = 'Native Elements'
+
+    minerals = models.Mineral.objects.filter(Q(group=group))
+    return render(request, 'index.html', {'minerals': minerals})
+
+
+def search_letter(request, letter):
+    minerals = models.Mineral.objects.filter(Q(name__istartswith=letter))
+    return render(request, 'index.html', {'minerals': minerals})

@@ -17,9 +17,17 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include, url
 from . import views
+from django.conf import settings
+from django.conf.urls import include, url
 
 urlpatterns = [
-    path('mineral/', include(('minerals.urls','minerals'),namespace='minerals')),
+    url(r'mineral/', include(('minerals.urls','minerals'),namespace='minerals')),
     path('admin/', admin.site.urls),
-    path('', views.home_page,name ='home'),
+    url(r'^$', views.home_page,name ='home'),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns

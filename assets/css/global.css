@@ -202,3 +202,35 @@ table, p, ul { margin-bottom: 2.5rem; }
 .mineral__table-container { padding: 5px 30px 0; }
 .mineral__category { font-weight: bold; width: 40%; }
 .mineral__formula { font-size: 12px; }
+.top-bar{}
+.top-bar-left{float:left}
+.top-bar-right{float:right}
+* {box-sizing: border-box;}
+.sidenav {
+    height: 100%;
+    width: 100px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #384033;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 10px;
+    color: #818181;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+

@@ -1,5 +1,5 @@
 {% load static from staticfiles %}
-
+{% load minerals_extras %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +15,30 @@
     <link rel="stylesheet" href="{% static 'css/global.css' %}">
 </head>
 <body>
+<div class="sidenav">
+    <form action="{% url 'minerals:name_search' %}">
+        <input type="text" placeholder="Search by name" name="q">
+        <button type="submit">Search</button>
+    </form>
+    {% group_names as groups %}
+    {% for group in groups %}
+        {% url 'minerals:group_search' group=group as test %}
+        {% if request.get_full_path == test %}
+            <a href="{% url 'minerals:group_search' group=group %}"
+               style="background-color: gold;font-weight: bold;">
+                {{ group }}</a>
+        {% else %}
+            <a href="{% url 'minerals:group_search' group=group %}">
+                {{ group|truncatechars:12 }}</a>
+        {% endif %}
+    {% endfor %}
+
+
+</div>
+
+
 <div class="bounds">
+
     <div class="grid-100">
         <a href="{% url 'home' %}">
             <svg class="logo" viewBox="0 0 127.6 84.8"
@@ -31,11 +54,32 @@
         </a>
         <p class="logo__text text-centered">They're amazing and not rocks!</p>
     </div>
-    {% block content %}{% endblock %}
+    <h2 align="center">search by letter
+
+    </h2>
+    {% alphabet as alpha %}
+    <p align="center">
+        {% for letter in alpha %}
+            {% url 'minerals:letter_search' letter=letter as test2 %}
+            {% if request.get_full_path == test2 %}
+                <a href="{% url 'minerals:letter_search' letter=letter %}"
+                   style="background-color: gold;font-weight: bold;">
+                    {{ letter }}</a>
+            {% else %}
+                <a href="{% url 'minerals:letter_search' letter=letter %}">
+                    {{ letter }}</a>
+            {% endif %}
+        {% endfor %}
+
+    </p>
+    <div class="grid-100">
+        {% block content %}{% endblock %}
+    </div>
 </div>
 <div class="minerals__random">
     <a class="minerals__anchor" href="{% url 'minerals:random' %}">Show random
         mineral</a>
 </div>
+
 </body>
 </html>
