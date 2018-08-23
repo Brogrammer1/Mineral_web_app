@@ -51,6 +51,6 @@ def search_group(request, group):
     return render(request, 'index.html', {'minerals': minerals})
 
 
-def search_letter(request, letter):
+def search_letter(request, letter='a'):
     minerals = models.Mineral.objects.filter(Q(name__istartswith=letter))
     return render(request, 'index.html', {'minerals': minerals})

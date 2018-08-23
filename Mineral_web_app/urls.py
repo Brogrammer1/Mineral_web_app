@@ -20,14 +20,18 @@ from . import views
 from django.conf import settings
 from django.conf.urls import include, url
 
+import minerals
+
 urlpatterns = [
-    url(r'mineral/', include(('minerals.urls','minerals'),namespace='minerals')),
+    url(r'mineral/',
+        include(('minerals.urls', 'minerals'), namespace='minerals')),
     path('admin/', admin.site.urls),
-    url(r'^$', views.home_page,name ='home'),
+    url(r'^$', minerals.views.search_letter, name='home'),
 ]
 
 if settings.DEBUG:
     import debug_toolbar
+
     urlpatterns = [
-        url(r'^__debug__/', include(debug_toolbar.urls)),
-    ] + urlpatterns
+                      url(r'^__debug__/', include(debug_toolbar.urls)),
+                  ] + urlpatterns

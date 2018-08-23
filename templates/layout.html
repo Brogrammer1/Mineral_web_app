@@ -60,8 +60,10 @@
     {% alphabet as alpha %}
     <p align="center">
         {% for letter in alpha %}
-            {% url 'minerals:letter_search' letter=letter as test2 %}
-            {% if request.get_full_path == test2 %}
+            {% url 'minerals:letter_search' letter=letter as letter_search_url %}
+            {% url 'home'  as home_url %}
+
+            {% if request.get_full_path == letter_search_url or request.get_full_path == home_url and letter == 'a' %}
                 <a href="{% url 'minerals:letter_search' letter=letter %}"
                    style="background-color: gold;font-weight: bold;">
                     {{ letter }}</a>
